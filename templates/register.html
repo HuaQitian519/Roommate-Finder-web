@@ -1,0 +1,98 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <h2>注册</h2>
+    <form id="registerForm" method="POST" action="{{ url_for('register') }}">
+        <div class="mb-3">
+            <label for="real_name" class="form-label">真实姓名</label>
+            <input type="text" id="real_name" name="real_name" class="form-control" required>
+        </div>
+        <div class="mb-3">
+            <label for="username" class="form-label">用户名</label>
+            <input type="text" id="username" name="username" class="form-control" required>
+        </div>
+        <div class="mb-3">
+            <label for="password" class="form-label">密码</label>
+            <input type="password" id="password" name="password" class="form-control" placeholder="密码" required>
+        </div>
+        <div class="mb-3">
+    <label for="wechat" class="form-label">微信联系方式</label>
+    <input type="text" id="wechat" name="wechat" class="form-control" placeholder="微信号">
+</div>
+    <div class="mb-3">
+            <label for="gender" class="form-label">性别</label>
+            <select id="gender" name="gender" class="form-control" required>
+                <option value="male">男</option>
+                <option value="female">女</option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="major" class="form-label">专业</label>
+            <select id="major" name="major" class="form-select" required>
+                <option value="智能科学与技术">智能科学与技术</option>
+                <option value="数字媒体技术">数字媒体技术</option>
+                <option value="视觉传达设计">视觉传达设计</option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="sleep_time" class="form-label">睡觉时间</label>
+            <input type="time" id="sleep_time" name="sleep_time" class="form-control" required>
+        </div>
+        <div class="mb-3">
+            <label for="wake_time" class="form-label">起床时间</label>
+            <input type="time" id="wake_time" name="wake_time" class="form-control" required>
+        </div>
+        <div class="mb-3">
+            <label for="ac_temp" class="form-label">空调温度 (16-30)</label>
+            <input type="range" id="ac_temp" name="ac_temp" class="form-range" min="16" max="30" value="25" required>
+            <span id="ac_temp_display">25</span>°C
+        </div>
+        <div class="mb-3">
+            <label for="cleanliness" class="form-label">洁癖程度 (1-不在乎，10-非常在乎)</label>
+            <input type="number" id="cleanliness" name="cleanliness" class="form-control" placeholder="洁癖程度 (1-10)" min="1" max="10" required>
+        </div>
+        <div class="mb-3">
+            <label for="bunk_preference" class="form-label">上下铺偏好</label>
+            <select id="bunk_preference" name="bunk_preference" class="form-select" required>
+                <option value="upper">上铺</option>
+                <option value="lower">下铺</option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="study_habits" class="form-label">学习状态</label>
+            <input type="text" id="study_habits" name="study_habits" class="form-control" placeholder="学习状态" required>
+        </div>
+        <div class="mb-3">
+            <label for="roommate_preferences" class="form-label">对室友要求</label>
+            <textarea id="roommate_preferences" name="roommate_preferences" class="form-control" placeholder="对室友要求"></textarea>
+        </div>
+        <div class="mb-3">
+            <label for="weekend_stay" class="form-label">周末或节假日留校情况</label>
+            <input type="text" id="weekend_stay" name="weekend_stay" class="form-control" placeholder="周末或节假日留校情况" required>
+        </div>
+        <div class="mb-3">
+            <label for="group_life" class="form-label">依赖群体生活</label>
+            <select id="group_life" name="group_life" class="form-select" required>
+                <option value="是">是</option>
+                <option value="否">否</option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="hobbies" class="form-label">兴趣爱好</label>
+            <textarea id="hobbies" name="hobbies" class="form-control" placeholder="兴趣爱好"></textarea>
+        </div>
+        <div class="mb-3">
+            <label for="dietary_restrictions" class="form-label">忌口</label>
+            <textarea id="dietary_restrictions" name="dietary_restrictions" class="form-control" placeholder="忌口"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">注册</button>
+    </form>
+</div>
+
+<script>
+document.getElementById('ac_temp').addEventListener('input', function() {
+    document.getElementById('ac_temp_display').textContent = this.value;
+});
+</script>
+{% endblock %}

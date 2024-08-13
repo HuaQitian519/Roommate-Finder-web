@@ -1,0 +1,97 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <h2>编辑用户信息</h2>
+    <h3>姓名: {{ user.real_name }}</h3>
+    <p>专业: {{ user.major }}</p>
+    <p>睡觉时间: {{ user.sleep_time }}</p>
+    <p>起床时间: {{ user.wake_time }}</p>
+    <p>空调温度偏好: {{ user.ac_temp }}°C</p>
+    <p>洁癖程度: {{ user.cleanliness }}</p>
+    <p>上下铺偏好: {% if user.bunk_preference == "upper" %}上铺{% else %}下铺{% endif %}</p>
+    <p>学习习惯: {{ user.study_habits }}</p>
+    <p>周末或节假日留校情况: {{ user.weekend_stay }}</p>
+    <p>是否依赖群体生活: {% if user.group_life == "是" %}是{% else %}否{% endif %}</p>
+    <p>兴趣爱好: {{ user.hobbies }}</p>
+    <p>忌口: {{ user.dietary_restrictions }}</p>
+    <p>微信联系方式: {{ user.wechat }}</p>
+
+    <form method="POST" action="{{ url_for('edit_user', user_id=user.id) }}">
+        <div class="mb-3">
+            <label for="real_name" class="form-label">真实姓名</label>
+            <input type="text" id="real_name" name="real_name" class="form-control" value="{{ user.real_name }}" required>
+        </div>
+        <div class="mb-3">
+            <label for="username" class="form-label">用户名</label>
+            <input type="text" id="username" name="username" class="form-control" value="{{ user.username }}" required>
+        </div>
+        <div class="mb-3">
+            <label for="gender" class="form-label">性别</label>
+            <select id="gender" name="gender" class="form-control" required>
+                <option value="male" {% if user.gender == 'male' %}selected{% endif %}>男</option>
+                <option value="female" {% if user.gender == 'female' %}selected{% endif %}>女</option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="major" class="form-label">专业</label>
+            <input type="text" id="major" name="major" class="form-control" value="{{ user.major }}" required>
+        </div>
+        <div class="mb-3">
+            <label for="sleep_time" class="form-label">睡觉时间</label>
+            <input type="time" id="sleep_time" name="sleep_time" class="form-control" value="{{ user.sleep_time }}" required>
+        </div>
+        <div class="mb-3">
+            <label for="wake_time" class="form-label">起床时间</label>
+            <input type="time" id="wake_time" name="wake_time" class="form-control" value="{{ user.wake_time }}" required>
+        </div>
+        <div class="mb-3">
+            <label for="ac_temp" class="form-label">空调温度偏好 (°C)</label>
+            <input type="number" id="ac_temp" name="ac_temp" class="form-control" value="{{ user.ac_temp }}" required>
+        </div>
+        <div class="mb-3">
+            <label for="cleanliness" class="form-label">洁癖程度（1-不在乎，10-非常在乎）</label>
+            <input type="number" id="cleanliness" name="cleanliness" class="form-control" value="{{ user.cleanliness }}" required>
+        </div>
+        <div class="mb-3">
+            <label for="bunk_preference" class="form-label">上下铺偏好</label>
+            <select id="bunk_preference" name="bunk_preference" class="form-control" required>
+                <option value="upper" {% if user.bunk_preference == 'upper' %}selected{% endif %}>上铺</option>
+                <option value="lower" {% if user.bunk_preference == 'lower' %}selected{% endif %}>下铺</option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="study_habits" class="form-label">学习习惯</label>
+            <input type="text" id="study_habits" name="study_habits" class="form-control" value="{{ user.study_habits }}" required>
+        </div>
+        <div class="mb-3">
+            <label for="weekend_stay" class="form-label">周末或节假日留校情况</label>
+            <input type="text" id="weekend_stay" name="weekend_stay" class="form-control" value="{{ user.weekend_stay }}" required>
+        </div>
+        <div class="mb-3">
+            <label for="group_life" class="form-label">是否依赖群体生活</label>
+            <select id="group_life" name="group_life" class="form-control" required>
+                <option value="是" {% if user.group_life == '是' %}selected{% endif %}>是</option>
+                <option value="否" {% if user.group_life == '否' %}selected{% endif %}>否</option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="hobbies" class="form-label">兴趣爱好</label>
+            <input type="text" id="hobbies" name="hobbies" class="form-control" value="{{ user.hobbies }}" required>
+        </div>
+        <div class="mb-3">
+            <label for="dietary_restrictions" class="form-label">忌口</label>
+            <input type="text" id="dietary_restrictions" name="dietary_restrictions" class="form-control" value="{{ user.dietary_restrictions }}" required>
+        </div>
+        <div class="mb-3">
+            <label for="wechat" class="form-label">微信联系方式</label>
+            <input type="text" id="wechat" name="wechat" class="form-control" value="{{ user.wechat }}">
+        </div>
+        <div class="mb-3">
+            <label for="password" class="form-label">新密码</label>
+            <input type="password" id="password" name="password" class="form-control" placeholder="如不更改密码，可留空">
+        </div>
+        <button type="submit" class="btn btn-primary">保存修改</button>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <h2>个人信息</h2>
+    <form id="profileForm" method="POST" action="{{ url_for('profile') }}">
+        <div class="mb-3">
+            <label for="major" class="form-label">专业</label>
+            <select id="major" name="major" class="form-select" required>
+                <option value="智能科学与技术" {% if user.major == "智能科学与技术" %}selected{% endif %}>智能科学与技术</option>
+                <option value="数字媒体技术" {% if user.major == "数字媒体技术" %}selected{% endif %}>数字媒体技术</option>
+                <option value="视觉传达设计" {% if user.major == "视觉传达设计" %}selected{% endif %}>视觉传达设计</option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="sleep_time" class="form-label">睡觉时间</label>
+            <input type="time" id="sleep_time" name="sleep_time" class="form-control" value="{{ user.sleep_time }}" required>
+        </div>
+        <div class="mb-3">
+            <label for="wake_time" class="form-label">起床时间</label>
+            <input type="time" id="wake_time" name="wake_time" class="form-control" value="{{ user.wake_time }}" required>
+        </div>
+        <div class="mb-3">
+            <label for="ac_temp" class="form-label">空调温度 (16-30)</label>
+            <input type="range" id="ac_temp" name="ac_temp" class="form-range" min="16" max="30" value="{{ user.ac_temp }}" required>
+            <span id="ac_temp_display">{{ user.ac_temp }}</span>°C
+        </div>
+        <div class="mb-3">
+            <label for="cleanliness" class="form-label">洁癖程度 (1-10)</label>
+            <input type="number" id="cleanliness" name="cleanliness" class="form-control" value="{{ user.cleanliness }}" min="1" max="10" required>
+        </div>
+        <div class="mb-3">
+            <label for="bunk_preference" class="form-label">上下铺偏好</label>
+            <select id="bunk_preference" name="bunk_preference" class="form-select" required>
+                <option value="upper" {% if user.bunk_preference == "upper" %}selected{% endif %}>上铺</option>
+                <option value="lower" {% if user.bunk_preference == "lower" %}selected{% endif %}>下铺</option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="study_habits" class="form-label">学习状态</label>
+            <input type="text" id="study_habits" name="study_habits" class="form-control" value="{{ user.study_habits }}" required>
+        </div>
+        <div class="mb-3">
+            <label for="roommate_preferences" class="form-label">对室友要求</label>
+            <textarea id="roommate_preferences" name="roommate_preferences" class="form-control">{{ user.roommate_preferences }}</textarea>
+        </div>
+        <div class="mb-3">
+            <label for="weekend_stay" class="form-label">周末或节假日留校情况</label>
+            <input type="text" id="weekend_stay" name="weekend_stay" class="form-control" value="{{ user.weekend_stay }}" required>
+        </div>
+        <div class="mb-3">
+            <label for="group_life" class="form-label">依赖群体生活</label>
+            <select id="group_life" name="group_life" class="form-select" required>
+                <option value="是" {% if user.group_life == "是" %}selected{% endif %}>是</option>
+                <option value="否" {% if user.group_life == "否" %}selected{% endif %}>否</option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="hobbies" class="form-label">兴趣爱好</label>
+            <textarea id="hobbies" name="hobbies" class="form-control">{{ user.hobbies }}</textarea>
+        </div>
+        <div class="mb-3">
+            <label for="dietary_restrictions" class="form-label">忌口</label>
+            <textarea id="dietary_restrictions" name="dietary_restrictions" class="form-control">{{ user.dietary_restrictions }}</textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">更新信息</button>
+    </form>
+</div>
+
+<script>
+document.getElementById('ac_temp').addEventListener('input', function() {
+    document.getElementById('ac_temp_display').textContent = this.value;
+});
+</script>
+{% endblock %}

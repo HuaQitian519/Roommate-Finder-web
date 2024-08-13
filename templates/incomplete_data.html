@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>信息不完整 - 室友匹配系统</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>信息不完整</h1>
+        <p>您的信息尚未填写完整，请完善信息以便系统为您寻找匹配的室友。</p>
+        <a href="{{ url_for('modify') }}">点击这里填写信息</a>
+    </div>
+</body>
+</html>

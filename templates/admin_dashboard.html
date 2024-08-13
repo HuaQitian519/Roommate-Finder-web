@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <h2>管理员面板</h2>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>用户名</th>
+                <th>真实姓名</th>
+                <th>性别</th>
+                <th>审核状态</th>
+                <th>封禁状态</th>
+                <th>操作</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for user in users %}
+            <tr>
+                <td>{{ user.username }}</td>
+                <td>{{ user.real_name }}</td>
+                <td>{{ '男' if user.gender == 'male' else '女' }}</td>
+                <td>{{ '已通过' if user.is_approved else '未通过' }}</td>
+                <td>{{ '已封禁' if user.is_banned else '正常' }}</td>
+                <td>
+                    <a href="{{ url_for('approve_user', user_id=user.id) }}" class="btn btn-success btn-sm">通过审核</a>
+                    <a href="{{ url_for('ban_user', user_id=user.id) }}" class="btn btn-danger btn-sm">{{ '解除封禁' if user.is_banned else '封禁' }}</a>
+                    <a href="{{ url_for('edit_user', user_id=user.id) }}" class="btn btn-primary btn-sm">编辑</a>
+                    <form action="{{ url_for('delete_user', user_id=user.id) }}" method="POST" style="display:inline;"><button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('确定要删除这个用户吗？')">删除</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

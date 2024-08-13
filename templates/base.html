@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Roommate Finder</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <h1>Roommate Finder</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="{{ url_for('index') }}">首页</a></li>
+                    {% if current_user.is_authenticated %}
+                    <li><a href="{{ url_for('profile') }}">个人信息</a></li>
+                    <li><a href="{{ url_for('match') }}">寻找室友</a></li>
+                    <li><a href="{{ url_for('logout') }}">登出</a></li>
+                    {% else %}
+                    <li><a href="{{ url_for('login') }}">登录</a></li>
+                    <li><a href="{{ url_for('register') }}">注册</a></li>
+                    {% endif %}
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <main class="content">
+        <div class="container">
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    <div class="alert">
+                        {% for message in messages %}
+                            <p>{{ message }}</p>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            {% endwith %}
+            {% block content %}{% endblock %}
+        </div>
+    </main>
+    <footer>
+        <div class="container">
+            <p>Powered By INNO. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
